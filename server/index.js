@@ -6,9 +6,9 @@ let app = express();
 
 app.use(express.static(__dirname, '../client/dist'));
 
-// app.get('/', (req, res) => {
-//   res.send('Hello World');
-// });
+app.get('/', (req, res) => {
+  res.send('Hello World');
+});
 
 
 app.listen(process.env.PORT, () => console.log(`Listening on ${process.env.PORT}`));
