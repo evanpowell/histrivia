@@ -1,0 +1,19 @@
+{
+  "name": "histrivia",
+  "version": "0.1.0",
+  "description": "Historical trivia app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evansaurus/histrivia.git"
+  },
+  "author": "evansaurus",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/evansaurus/histrivia/issues"
+  },
+  "homepage": "https://github.com/evansaurus/histrivia#readme"
+}
