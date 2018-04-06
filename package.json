@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/evansaurus/histrivia/issues"
   },
-  "homepage": "https://github.com/evansaurus/histrivia#readme"
+  "homepage": "https://github.com/evansaurus/histrivia#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "pg": "^7.4.1"
+  }
 }
