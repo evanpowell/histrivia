@@ -4,7 +4,7 @@ const db = require('../database/index');
 
 let app = express();
 
-app.use(express.static(__dirname, '../client/dist'));
+// app.use(express.static(__dirname, '../client/dist'));
 
 app.get('/', (req, res) => {
   res.send('Hello World');
