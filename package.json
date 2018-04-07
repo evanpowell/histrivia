@@ -4,7 +4,9 @@
   "description": "Historical trivia app",
   "main": "index.js",
   "scripts": {
-    "startup": "webpack && node server/index.js"
+    "startup": "webpack && node server/index.js",
+    "react-dev": "webpack -d --watch",
+    "server-dev": "node server/index.js"
   },
   "repository": {
     "type": "git",
@@ -21,8 +23,10 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.3",
     "pg": "^7.4.1",
+    "pg-hstore": "^2.3.2",
     "react": "^16.3.1",
-    "react-dom": "^16.3.1"
+    "react-dom": "^16.3.1",
+    "sequelize": "^4.37.6"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
