@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Question from './components/Question.jsx';
 import Answer from './components/Answer.jsx';
+import Login from './components/Login.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -12,11 +13,31 @@ class App extends React.Component {
       answer: {
         isAnswered: false,
         isCorrect: false
-      }
+      },
+      user: ''
     }
   }
 
   componentDidMount() {
+  }
+
+  handleSignUp(username) {
+    const options = {
+      params: {
+        username: username
+      },
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+    axios
+      .post('/users', {params:{username: username}})
+      .then(result => {
+        console.log(result);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   handleAnswer(isCorrect) {
@@ -59,6 +80,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <Login />
         <h1>Histrivia</h1>
         <h3>A trivia game of historical proportions</h3>
         <button onClick={this.getQuestion.bind(this)}>Play!</button>
