@@ -7,7 +7,7 @@ const db = require('knex')({
 db.schema.hasTable('users').then(exists => {
   if (!exists) {
     return db.schema.createTable('users', t => {
-      t.string('username');
+      t.string('username').unique();
       t.integer('score');
     })
   }
