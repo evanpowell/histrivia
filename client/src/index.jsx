@@ -22,16 +22,8 @@ class App extends React.Component {
   }
 
   handleSignUp(username) {
-    const options = {
-      params: {
-        username: username
-      },
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }
     axios
-      .post('/users', {params:{username: username}})
+      .post('/users', {username: username})
       .then(result => {
         console.log(result);
       })

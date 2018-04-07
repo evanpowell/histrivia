@@ -1,54 +1,26 @@
-const Sequelize = require('sequelize');
-const db = new Sequelize(process.env.DATABASE_URL);
+const db = require('knex')({
+  client: 'pg',
+  connection: process.env.DATABASE_URL
+});
 
-const User = db.define('user', {
-  username: {
-    type: Sequelize.STRING,
-    unique: true
-  },
-  points: {
-    type: Sequelize.INTEGER,
-    defaultValue: 0
+
+db.schema.hasTable('users').then(exists => {
+  if (!exists) {
+    return db.schema.createTable('users', t => {
+      t.string('username');
+      t.integer('score');
+    })
   }
-})
+});
 
-const addUser = (username, cb) => {
-  User
-    .build({
-      username: username
-    })
-    .save()
-    .then(() => {
-      cb();
-    })
-    .catch(err => {
-      cb(err);
-    });
-}
+module.exports = db;
 
-const retrievePoints = (username) => {
-  return User.findOne({
-    where: {
-      username: username
-    },
-    attribues: ['points']
-  });
-}
-
-const addPoints = (username) => {
-  const points = retrievePoints(username);
-  User.update({
-    points: Sequelize.literal('points + 1')
-  },
-  {
-    where: {
-      username: {
-        [Op.eq]: username
-      }
-    }
-  })
-}
-
-module.exports.addUser = addUser;
-module.exports.retrievePoints = retrievePoints;
-module.exports.addPoints = addPoints;
+// const addUser = (username, cb) => {
+//   knex('users').insert({username: username, score:0})
+//     .then(() => {
+//       cb('Success');
+//     })
+//     .catch(err => {
+//       cb('Unsuccess');
+//     });
+// }
