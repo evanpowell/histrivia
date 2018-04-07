@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 app.use(express.static(__dirname + '/../client/dist'))
 
-app.get('/signup', (req, res) => {
+app.post('/signup', (req, res) => {
   const username = req.query.username;
   console.log(req.query.username)
   console.log(`Adding ${username} to the database`);

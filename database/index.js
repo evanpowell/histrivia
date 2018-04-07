@@ -14,13 +14,3 @@ db.schema.hasTable('users').then(exists => {
 });
 
 module.exports = db;
-
-// const addUser = (username, cb) => {
-//   knex('users').insert({username: username, score:0})
-//     .then(() => {
-//       cb('Success');
-//     })
-//     .catch(err => {
-//       cb('Unsuccess');
-//     });
-// }
