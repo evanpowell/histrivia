@@ -2,13 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Question from './components/Question.jsx';
+import Answer from './components/Answer.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       question: {},
-      correct: false
+      answer: {
+        isAnswered: false,
+        isCorrect: false
+      }
     }
   }
 
@@ -19,10 +23,18 @@ class App extends React.Component {
     if (isCorrect) {
       console.log('you got it right!')
       this.setState({
-        correct: true
+        answer: {
+          isCorrect: true,
+          isAnswered: true
+        }
       });
     } else {
-      console.log('you got it wrong!')
+      this.setState({
+        answer: {
+          isCorrect: false,
+          isAnswered: true
+        }
+      });
     }
   }
 
@@ -32,7 +44,11 @@ class App extends React.Component {
     .then(result => {
       console.log(result.data.results[0]);
       component.setState({
-        question: result.data.results[0]
+        question: result.data.results[0],
+        answer: {
+          isAnswered: false,
+          isCorrect: false
+        }
       });
     })
     .catch(err => {
@@ -46,7 +62,11 @@ class App extends React.Component {
         <h1>Histrivia</h1>
         <h3>A trivia game of historical proportions</h3>
         <button onClick={this.getQuestion.bind(this)}>Play!</button>
-        <Question prompt={this.state.question} answerFunc={this.state.handleAnswer.bind(this)}/>
+        <Question
+          answer={this.state.answer}
+          prompt={this.state.question}
+          answerFunc={this.handleAnswer.bind(this)}/>
+        <Answer prompt={this.state.question} answer={this.state.answer}/>
       </div>
     );
   }
