@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require('axios');
-const cors = require('cors');
 
 const db = require('../database/index');
 
@@ -9,7 +8,6 @@ let app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(cors());
 
 app.use(express.static(__dirname + '/../client/dist'))
 
