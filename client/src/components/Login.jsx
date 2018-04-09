@@ -1,11 +1,19 @@
 import React from 'react';
 
 const Login = props => {
+  const divStyle = {
+    margin: '15px'
+  };
+  const inputStyle = {
+    marginRight: '8px'
+  }
   return (
-    <form onSubmit={props.login}>
-      <input type="text" value={props.value} onChange={props.change} />
-      <input type="submit" value="Login" />
-    </form>
+    <div style={divStyle} className="my-5">
+      <form onSubmit={props.login}>
+        <input style={inputStyle} type="text" value={props.value} onChange={props.change} />
+        <input type="submit" value="Login" />
+      </form>
+    </div>
   );
 }
 
