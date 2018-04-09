@@ -14,22 +14,34 @@ class App extends React.Component {
         isAnswered: false,
         isCorrect: false
       },
-      user: ''
+      user: {}
     }
   }
 
   componentDidMount() {
   }
 
-  handleSignUp(username) {
+  handleLogin(username) {
     axios
-      .post('/users', {username: username})
+      .get('/login', {username: username})
       .then(result => {
         console.log(result);
       })
       .catch(err => {
         console.log(err);
       });
+  }
+
+  handleSignUp(username) {
+    axios
+      .post('/signup', {username: username})
+      .then(result => {
+        console.log(result);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    this.handleLogin(username);
   }
 
   handleAnswer(isCorrect) {

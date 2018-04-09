@@ -8,7 +8,24 @@ let app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
-app.use(express.static(__dirname + '/../client/dist'))
+app.use(express.static(__dirname + '/../client/dist'));
+
+app.post('/login', (req, res) => {
+  const username = req.query.username;
+  db('users')
+    .where({
+      username: username
+    })
+    .select('score')
+    .then(result => {
+      console.log(result);
+      res.send('Result: ' + result);
+    })
+    .catch(err => {
+      console.log(err);
+      res.send(err);
+    });
+})
 
 app.post('/signup', (req, res) => {
   const username = req.query.username;
