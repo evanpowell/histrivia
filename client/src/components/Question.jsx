@@ -14,7 +14,7 @@ const Question = (props) => {
       randomAnswers.push(answers.splice(randomIndex, 1)[0]);
     }
     return (
-      <div>
+      <div className="question">
         <h3>{prompt.question}</h3>
         {randomAnswers.map((answer, index) => {
           return <Choice key={index} handleAnswer={props.answerFunc} answer={answer} />

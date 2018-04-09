@@ -1,13 +1,11 @@
 import React from 'react';
 
-const Login = (props) => {
-
+const Login = props => {
   return (
-    <div>
-      <input type="text" placeHolder="Enter a username"></input>
-      <button>Signup</button>
-      <button>Login</button>
-    </div>
+    <form onSubmit={props.login}>
+      <input type="text" value={props.value} onChange={props.change} />
+      <input type="submit" value="Login" />
+    </form>
   );
 }
 
