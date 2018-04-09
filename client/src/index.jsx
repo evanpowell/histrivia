@@ -39,32 +39,47 @@ class App extends React.Component {
     if(event) {
       event.preventDefault();
     }
-    username = username || this.state.loginVal;
+    const component = this;
     axios
       .post('/login', {username: username})
       .then(result => {
-        console.log(JSON.stringify(result));
+        if (result.data.username) {
+          component.setState({
+            user: {
+              name: result.data.username,
+              score: result.data.score
+            }
+          })
+        }
       })
       .catch(err => {
         console.log(err);
       });
+    this.setState({
+      loginVal: ''
+    });
   }
 
   handleLoginChange(event) {
     this.setState({loginVal: event.target.value});
   }
 
-  handleSignup(event) {
+  handleSignup(event, username) {
     event.preventDefault();
-    const username = this.state.signupVal;
+    console.log(username);
+    const component = this;
     axios
       .post('/signup', {username: username})
       .then(result => {
-        console.log(JSON.stringify(result));
+        console.log(result.data);
+        component.handleLogin(null, username);
       })
       .catch(err => {
         console.log(err);
       });
+    this.setState({
+      signupVal: ''
+    })
   }
 
   handleSignupChange(event) {
@@ -87,8 +102,18 @@ class App extends React.Component {
         })
         .catch(err => {
           console.log(err);
+        });
+      const {name, score} = component.state.user;
+      axios.post('/addPoints', {username: name})
+        .then(result => {
+          console.log('Point add to the database!')
+          component.setState({
+            user: {
+              name: name,
+              score: score + 1
+            }
+          })
         })
-      axios.post('/addPoints', {username})
     } else {
       axios.get('https://yesno.wtf/api?force=no')
         .then(result => {

@@ -9,7 +9,7 @@ const Signup = props => {
   }
   return (
     <div style={divStyle} className="my-5">
-      <form onSubmit={props.signup}>
+      <form onSubmit={(event) => {props.signup(event, props.value)}}>
         <input style={inputStyle} type="text" value={props.value} onChange={props.change} />
         <input type="submit" value="Signup" />
       </form>
