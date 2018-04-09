@@ -19,7 +19,7 @@ app.post('/login', (req, res) => {
     .select('score')
     .then(result => {
       console.log(result);
-      res.send(JSON.stringify(result));
+      res.send(result[0].score);
     })
     .catch(err => {
       console.log(err);
