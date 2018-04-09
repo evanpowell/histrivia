@@ -19,7 +19,7 @@ app.post('/login', (req, res) => {
     .select('score')
     .then(result => {
       console.log(result);
-      res.send('Result: ' + JSON.stringify(result));
+      res.send(result[0].score);
     })
     .catch(err => {
       console.log(err);
@@ -33,12 +33,15 @@ app.post('/signup', (req, res) => {
   console.log(`Adding ${username} to the database`);
   db('users').insert({username: username, score:0})
     .then(() => {
-      res.send('Success');
+      console.log(`${username} successfully added`);
+      res.send(`Welcome, ${username}! You have been add to the database!`);
     })
     .catch(err => {
+      console.log(err);
       res.send('Unsuccess');
     });
 })
+
 
 const PORT = process.env.PORT || 3000;
 
